@@ -3,6 +3,6 @@ module:
     min: "0.64.0"
   mounts:
   - source: partials
-    target: layouts/partials/tnd-{moduleName}
+    target: layouts/partials/tnd-events
   - source: console
-    target: layouts/partials/tnd-{moduleName}
+    target: layouts/partials/tnd-events
