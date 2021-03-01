@@ -1,0 +1,22 @@
+{{/*
+  GetDateFormat
+  Retrieve user defined of default time format (for display time in view)
+
+  @author @regisphilibert
+
+  @context Any (.)
+
+  @access public
+
+  @returns String
+
+  @uses
+    - tnd-events/private/GetConfig
+*/}}
+{{ $datetime_formats := dict "date" "January 2, 2006" "time" "3:04 pm" "datetime" "January 2, 2006 at 3:04 pm"}}
+{{ $config := partialCached "tnd-events/private/GetConfig" "GetConfig" }}
+{{ with $config.date_formats }}
+  {{ $datetime_formats = merge $datetime_formats . }}
+{{ end }}
+
+{{ return $datetime_formats }}

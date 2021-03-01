@@ -1,0 +1,13 @@
+{{ $start := .start.datetime }}
+{{ $end := "" }}
+{{ with .end }}
+  {{ $end = .time }}
+  {{ if ne $.start.date .date }}
+    {{ $end = .datetime }}
+  {{ end }}
+{{ end }}
+
+<time datetime="{{ .start.raw }}">{{ .start.datetime }}</time>
+{{ with $end }}
+  - <time datetime="{{ $.end.raw }}">{{ $end }}</time>
+{{ end }}

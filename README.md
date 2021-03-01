@@ -28,6 +28,17 @@ module:
 
 ## Usage
 
+## Date Handling
+
+In order to not use default `date` parameter to assign start and end times for the events, we'll use `time_start` and `time_end`. For Hugo to pick `time_start` as the effective date of an event you need to add this to your project configuration:
+
+```
+frontmatter:
+  date:
+  - time_start
+  - :default
+```
+
 ### Some Partial/Feature
 
 #### Examples

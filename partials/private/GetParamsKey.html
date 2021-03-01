@@ -1,0 +1,8 @@
+{{ $defaults := dict "events" "events" }}
+{{ $key := index $defaults . }}
+{{ $config := partialCached "tnd-books/private/GetConfig" "GetConfig" }}
+{{ with index $config (print $key "_key") }}
+  {{ $key = . }}
+{{ end }}
+
+{{ return $key }}

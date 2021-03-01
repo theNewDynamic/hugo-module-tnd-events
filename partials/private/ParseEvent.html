@@ -1,0 +1,14 @@
+{{ $s := newScratch }}
+{{ with .Title }}
+  {{ $s.SetInMap "data" "title" . }}
+{{ end }}
+
+{{ $formats := partialCached "tnd-events/private/GetDateTimeFormats" "GetDateTimeFormats" }}
+{{ range $key := slice "time_start" "time_end" }}
+  {{ with index $.Params . }}
+    {{ $date := dict "raw" . "rendered" (. | dateFormat $formats.datetime) "date" (. | dateFormat $formats.date) "time" (. | dateFormat $formats.time) "datetime" (. | dateFormat $formats.datetime) }}
+    {{ $s.SetInMap "data" (replace $key "time_" "") $date }}
+  {{ end }}
+{{ end }}
+
+{{ return $s.Get "data" }}
