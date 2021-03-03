@@ -1,0 +1,53 @@
+{{/*
+  ParseVenue
+  Structure Data for any given Path pointing to a venue content file OR a Map 
+  containing already structured data.
+
+  @author @regisphilibert
+
+  @context String OR Map
+
+  @access private
+
+  @returns Map
+    String (.name)
+    String (.address)
+    String (.city)
+    String (.state)
+    String (.country)
+    String (.zip)
+    String (.phone)
+    String (.link)
+  
+  @uses
+     - tnd-events/private/GetVenueKeys
+
+  @example - Go Template
+    {{ with partialCached "ParseVenue" . . }}
+      {{ something = . }}
+    {{ end }}
+*/}}
+{{ $s := newScratch }}
+
+{{ $s.Set "data" dict }}
+{{ $venue_key := "venue" }}
+{{ if reflect.IsMap . }}
+  {{ $s.Set "data" . }}
+{{ else }}
+  {{ with site.GetPage . }}
+    {{ with .Title }}
+      {{ $s.SetInMap "data" "name" . }}
+    {{ end }}
+    {{ $params := .Params }}
+    {{ with index .Params $venue_key }}
+      {{ $params = . }}
+    {{ end }}
+    {{ range $key := partialCached "tnd-events/private/GetVenueKeys" "GetVenueKeys"}}
+      {{ with index $params $key }}
+        {{ $s.SetInMap "data" $key . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $s.Get "data" }}

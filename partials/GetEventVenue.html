@@ -1,0 +1,36 @@
+{{/*
+  GetEventVenue
+  Retrieve the venue of a given event
+
+  @author @regisphilibert
+
+  @context Page (.)
+
+  @access public
+
+  @returns See tnd-events/private/ParseVenue@returns
+
+  @uses
+     - tnd-events/private/GetParamsKey
+     - tnd-events/private/ParseVenue
+
+  @example - Go Template
+    {{ with partialCached "GetEventVenue" . . }}
+      {{ something = . }}
+    {{ end }}
+*/}}
+{{ $venue := "" }}
+{{ $venue_keys := partialCached "tnd-events/private/GetParamsKey" "venue" "venue" }}
+{{ if not (reflect.IsSlice $venue_keys) }}
+  {{ $venue_keys = slice $venue_keys }}
+{{ end }}
+{{ range $venue_keys }}
+  {{ with index $.Params . }}
+    {{ with partialCached "tnd-events/private/ParseVenue" . . }}
+      {{ $venue = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+
+{{ return $venue }}

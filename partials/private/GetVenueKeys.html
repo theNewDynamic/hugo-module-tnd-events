@@ -1,0 +1,18 @@
+{{/*
+  GetVenueKeys
+  Retrieve the global list of venue keys
+
+  @author @regisphilibert
+
+  @context Any (.)
+
+  @access private
+
+  @returns Slice of strings
+
+  @example - Go Template
+    {{ with partialCached "GetVenueKeys" }}
+      {{ something = . }}
+    {{ end }}
+*/}}
+{{ return slice "address" "city" "state" "country" "zip" "phone" "link" }}

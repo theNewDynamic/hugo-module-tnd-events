@@ -1,6 +1,26 @@
-{{ $defaults := dict "events" "events" }}
+{{/*
+  GetParamsKey
+  Retrieves the key to use in Front Matter for any given string based on config or defaults
+
+  @author @regisphilibert
+
+  @context Any (.)
+
+  @access private
+
+  @returns String
+
+  @uses
+     - tnd-events/private/GetConfig
+
+  @example - Go Template
+    {{ with partialCached "GetParamsKey" }}
+      {{ something = . }}
+    {{ end }}
+*/}}
+{{ $defaults := dict "events" "events" "venue" "venue" }}
 {{ $key := index $defaults . }}
-{{ $config := partialCached "tnd-books/private/GetConfig" "GetConfig" }}
+{{ $config := partialCached "tnd-events/private/GetConfig" "GetConfig" }}
 {{ with index $config (print $key "_key") }}
   {{ $key = . }}
 {{ end }}
