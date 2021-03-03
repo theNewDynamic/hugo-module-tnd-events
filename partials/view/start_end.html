@@ -1,13 +1,15 @@
-{{ $start := .start.datetime }}
-{{ $end := "" }}
-{{ with .end }}
-  {{ $end = .time }}
-  {{ if ne $.start.date .date }}
-    {{ $end = .datetime }}
+{{ with $event := partialCached "tnd-events/private/ParseEvent" . . }}
+  {{ $start := .start.datetime }}
+  {{ $end_partial := "" }}
+  {{ with .end }}
+    {{ $end_partial = "time" }}
+    {{ if ne $event.start.date .date }}
+      {{ $end_partial = "datetime" }}
+    {{ end }}
   {{ end }}
-{{ end }}
 
-<time datetime="{{ .start.raw }}">{{ .start.datetime }}</time>
-{{ with $end }}
-  - <time datetime="{{ $.end.raw }}">{{ $end }}</time>
+  {{ partial "tnd-events/view/datetime" .start }}
+  {{ with $end_partial }}
+    - {{ partial (print "tnd-events/view/" $end_partial) $event.end }}
+  {{ end }}
 {{ end }}

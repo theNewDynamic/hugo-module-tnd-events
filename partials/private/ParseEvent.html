@@ -2,12 +2,22 @@
 {{ with .Title }}
   {{ $s.SetInMap "data" "title" . }}
 {{ end }}
-
+{{ $start := "" }}
+{{ $end := "" }}
 {{ $formats := partialCached "tnd-events/private/GetDateTimeFormats" "GetDateTimeFormats" }}
-{{ range $key := slice "time_start" "time_end" }}
-  {{ with index $.Params . }}
+{{ with .Date }}
+  {{ $start = . }}
+{{ end }}
+{{ with .Params.time_start }}
+  {{ $start = . }}
+{{ end }}
+{{ with .Params.time_end }}
+  {{ $end = . }}
+{{ end }}
+{{ range $key, $value := dict "start" $start "end" $end }}
+  {{ with $value }}
     {{ $date := dict "raw" . "rendered" (. | dateFormat $formats.datetime) "date" (. | dateFormat $formats.date) "time" (. | dateFormat $formats.time) "datetime" (. | dateFormat $formats.datetime) }}
-    {{ $s.SetInMap "data" (replace $key "time_" "") $date }}
+    {{ $s.SetInMap "data" $key $date }}
   {{ end }}
 {{ end }}
 
