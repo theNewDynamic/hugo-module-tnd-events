@@ -65,7 +65,7 @@ Venues can either be content files or Maps set to the events front matter. They 
 ### Venues as content files.
 If venues are used as content files, Events should refer to them with their path relative to the content directory of the project.
 
-```md
+```yaml
 # content/event/church-concert.md
 title: Church Concert
 time_start: 2021-11-22T17:30:08-05:00
@@ -76,7 +76,7 @@ venue: venue/church-at-the-corner.md
 ### Venues as maps.
 
 Venues can also directly be entered as Front Matter maps
-```md
+```yaml
 # content/event/church-concert.md
 title: Church Concert
 time_start: 2021-11-22T17:30:08-05:00

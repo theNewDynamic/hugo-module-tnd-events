@@ -1,0 +1,30 @@
+{{/*
+  GetDefaultVenue
+  Retrieve the default venue set by user in Module configuration
+
+  @author @regisphilibert
+
+  @context Any (.)
+
+  @access private
+
+  @returns See tnd-events/private/ParseVenue@returns
+
+  @uses
+     - tnd-events/private/GetConfig
+     - tnd-events/private/ParseVenue
+
+  @example - Go Template
+    {{ with partialCached "thd-events/private/GetDefaultVenue" "GetDefaultVenue" }}
+      {{ something = . }}
+    {{ end }}
+*/}}
+{{ $venue := "" }}
+{{ $config := partialCached "tnd-events/private/GetConfig" "GetConfig" }}
+{{ with $config.default_venue }}
+  {{ with partialCached "tnd-events/private/ParseVenue" . . }}
+    {{ $venue = . }}
+  {{ end }}
+{{ end }}
+
+{{ return $venue }}

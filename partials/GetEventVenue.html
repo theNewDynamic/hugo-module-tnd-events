@@ -21,6 +21,8 @@
 */}}
 {{ $venue := "" }}
 {{ $venue_keys := partialCached "tnd-events/private/GetParamsKey" "venue" "venue" }}
+{{/* Even if not advertised we can look for several param keys in case a project venues are refered differently
+  from one event to the next. */}}
 {{ if not (reflect.IsSlice $venue_keys) }}
   {{ $venue_keys = slice $venue_keys }}
 {{ end }}
@@ -32,5 +34,12 @@
   {{ end }}
 {{ end }}
 
+{{/* If we did not find any venue attached to the event, we resolve to looking for 
+  the default venue as set in the module configuration. */}}
+{{ if not $venue }}
+  {{ with partialCached "tnd-events/private/GetDefaultVenue" "GetDefaultVenue" }}
+    {{ $venue = . }}
+  {{ end }}
+{{ end }}
 
 {{ return $venue }}

@@ -1,0 +1,34 @@
+{{/*
+  MapHasValue
+  Check if at least one of the keys of a given map hold some value. 
+  Some CMS can produce the following which passes a `with .venue` test:
+
+  ```yaml
+  venue:
+    name: ''
+    address: ''
+    city: ''
+    state: ''
+    zip: ''
+  ``` 
+  @author @regisphilibert
+
+  @context Map (.)
+
+  @access private
+
+  @returns Bool
+
+  @example - Go Template
+    {{ with partialCached "tnd-events/private/MapHasValue" . . }}
+      {{ something = . }}
+    {{ end }}
+*/}}
+{{ $bool := false }}
+{{ range $key, $value := . }}
+  {{ with $value }}
+    {{ $bool = true }}
+  {{ end }}
+{{ end }}
+
+{{ return $bool }}

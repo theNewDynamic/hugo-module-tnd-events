@@ -32,7 +32,9 @@
 {{ $s.Set "data" dict }}
 {{ $venue_key := "venue" }}
 {{ if reflect.IsMap . }}
-  {{ $s.Set "data" . }}
+  {{ if partialCached "tnd-events/private/MapHasValue" . . }}
+    {{ $s.Set "data" . }}
+  {{ end }}
 {{ else }}
   {{ with site.GetPage . }}
     {{ with .Title }}
@@ -42,7 +44,7 @@
     {{ with index .Params $venue_key }}
       {{ $params = . }}
     {{ end }}
-    {{ range $key := partialCached "tnd-events/private/GetVenueKeys" "GetVenueKeys"}}
+    {{ range $key := partialCached "tnd-events/private/GetVenueKeys" "GetVenueKeys" }}
       {{ with index $params $key }}
         {{ $s.SetInMap "data" $key . }}
       {{ end }}
