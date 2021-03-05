@@ -6,5 +6,5 @@ module:
     target: layouts/partials/tnd-events
   - source: console
     target: layouts/partials/tnd-events
-imports:
-  - path: github.com/theNewDynamic/hugo-module-tnd-addtocal
+  imports:
+    - path: github.com/theNewDynamic/hugo-module-tnd-addtocal
