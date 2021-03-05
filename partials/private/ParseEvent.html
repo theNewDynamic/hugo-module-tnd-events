@@ -33,6 +33,9 @@
 {{ $start := "" }}
 {{ $end := "" }}
 {{ $formats := partialCached "tnd-events/private/GetDateTimeFormats" "GetDateTimeFormats" }}
+{{ with .RelPermalink }}
+  {{ $s.SetInMap "data" "URL" . }}
+{{ end }}
 {{ with .Date }}
   {{ $start = . }}
 {{ end }}
