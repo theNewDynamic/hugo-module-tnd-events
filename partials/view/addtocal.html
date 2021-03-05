@@ -1,0 +1,39 @@
+{{/*
+  addtocal
+  Wrapper for tnd-addtocal/add
+
+  @author @regisphilibert
+
+  @context Page (.)
+
+  @access public
+
+  @returns Type
+
+  @uses
+     - tnd-addtocal/add
+
+  @original
+      {{ with partialCached "tnd-addtocal/private/GetAvailableServices" . . }}
+      <span class="block tnd-addtocal__wrapper relative">
+        <div class="flex border justify-between p-2">
+        {{ with resources.Get "/tnd-addtocal/calendar.svg" }}
+        <img src="{{ .RelPermalink }}" alt="" class="icon">
+        {{ end }}
+        <span>Add to Calendar</span>
+        </div>
+        <div class="absolute left-0 top-full w-full z-10 bg-white" id="1" aria-haspopup="true" aria-expanded="false" tabindex="0">
+          <ul id="addeventatc1-drop" class="tnd-addtocal__dropdown hidden" aria-hidden="true" aria-labelledby="addeventatc1">
+            {{ range . }}
+              <li class="border-b border-l border-r p-2" role="menuitem">
+                <a class="align-center" href="{{ htmlUnescape .URL }}">
+                  <strong>{{ .label }}</strong>{{ if eq .type "online" }} <em>(online)</em>{{ end }}
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </span>
+      {{ end }}
+*/}}
+{{ partialCached "tnd-addtocal/add" . . }}

@@ -60,6 +60,7 @@ Venues can either be content files or Maps set to the events front matter. They 
 - __zip:__ A string or int Ex:'80120'
 - __phone:__ A string Ex: +1 555 5555
 - __link:__ A string Ex: https://church-corner.org
+- __tickets_link:__ A string Ex: https://church-corner.org
 
 
 ### Venues as content files.
@@ -113,6 +114,14 @@ or as a strucured map
 #### date_formats
 
 Date formats are used to format dates throughout the view files.
+
+## AddToCal
+
+The Events module uses TND's AddToCal module to generate an "Add to calendar" button lists the following services:
+- Google
+- Yahoo
+- iCal
+- Outlook
 
 ## theNewDynamic
 
