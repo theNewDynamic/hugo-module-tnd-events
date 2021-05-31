@@ -1,9 +1,8 @@
 {{ $events := slice }}
 {{ with where site.RegularPages ".Type" "event" }}
-{{ $events = . }}
   {{ with where . ".Date.Unix" "ge" now.Unix }}
-    {{ $events = . }}
+    {{ $events = .ByDate }}
   {{ end }}
 {{ end }}
 
-{{ return $events.ByDate }}
+{{ return $events }}
