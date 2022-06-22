@@ -77,6 +77,7 @@ venue: venue/church-at-the-corner.md
 ### Venues as maps.
 
 Venues can also directly be entered as Front Matter maps
+
 ```yaml
 # content/event/church-concert.md
 title: Church Concert
