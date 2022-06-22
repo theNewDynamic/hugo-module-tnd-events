@@ -72,7 +72,7 @@ title: Church Concert
 time_start: 2021-11-22T17:30:08-05:00
 time_end: 2021-11-22T20:30:08-05:00
 venue: venue/church-at-the-corner.md
-``` 
+```
 
 ### Venues as maps.
 
